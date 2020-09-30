@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:upgo/Screens/home_screen.dart';
+import 'package:upgo/Screens/dataentry_screen.dart';
 import 'package:upgo/data.dart';
 import '../components/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const String id = 'login_screen';
+class SignupScreen extends StatefulWidget {
+  static const String id = 'signup_screen';
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  bool showSpinner = false;
+class _SignupScreenState extends State<SignupScreen> {
   final _auth = FirebaseAuth.instance;
+  bool showSpinner = false;
   String _email;
   String _password;
 
@@ -65,20 +65,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 24.0,
               ),
               RoundedButton(
-                title: 'Log In',
+                title: 'Sign Up',
                 colour: Colors.blueAccent,
                 onPressed: () async {
                   setState(() {
                     showSpinner = true;
                   });
                   try {
-                    final user = await _auth.signInWithEmailAndPassword(
+                    final newUser = await _auth.createUserWithEmailAndPassword(
                         email: _email, password: _password);
-                    if (user != null) {
+
+                    if (newUser != null) {
                       print(_email);
                       print(_password);
                       signIn();
-                      Navigator.pushNamed(context, HomeScreen.id);
+                      Navigator.pushNamed(context, DataEntryScreen.id);
                     }
                     setState(() {
                       showSpinner = false;
@@ -92,6 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             content: Text(e.toString()),
                           );
                         });
+                    print(e);
                   }
                 },
               )

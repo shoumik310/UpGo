@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:upgo/Screens/home_screen.dart';
 import 'package:upgo/components/rounded_button.dart';
 import 'package:upgo/data.dart';
 import 'package:intl/intl.dart';
@@ -180,13 +181,32 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                 title: 'Submit',
                 colour: Colors.lightBlueAccent,
                 onPressed: () {
-                  print(name);
-                  print(
-                    (DateTime.now().difference(birthDate).inDays / 365)
-                        .floor()
-                        .toString(),
-                  );
-                  print(type + iveness);
+                  if (name != null &&
+                      aadhar != null &&
+                      birthDate != null &&
+                      type != null &&
+                      iveness != null) {
+                    addName(name);
+                    addAadhar(aadhar);
+                    addDate(birthDate.toString());
+                    addBlood(type + iveness);
+                    if (conditions.length == 0) {
+                      conditions.add("No Known Conditions");
+                    }
+                    addConditions(conditions);
+                    signIn();
+                    print(checkSignin());
+                    Navigator.pushNamed(context, HomeScreen.id);
+                  } else {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text('Entry Incomplete'),
+                            content: Text('Please Enter All Required Details'),
+                          );
+                        });
+                  }
                 },
               )
             ],
@@ -196,3 +216,5 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
     );
   }
 }
+
+//(DateTime.now().difference(birthDate).inDays / 365).floor().toString()

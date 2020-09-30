@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:upgo/Screens/DataEntryScreen.dart';
+import 'package:upgo/Screens/dataentry_screen.dart';
 import '../Screens/login_screen.dart';
-import 'SignupScreen.dart';
+import 'signup_screen.dart';
 import '../components/rounded_button.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -51,7 +51,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               title: 'Log In',
               colour: Colors.lightBlueAccent,
               onPressed: () {
-                Navigator.pushNamed(context, DataEntryScreen.id);
+                Navigator.pushNamed(context, LoginScreen.id);
               },
             ),
             RoundedButton(

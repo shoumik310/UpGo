@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1004513157213",
+    "firebase_url": "https://upgo-47506.firebaseio.com",
+    "project_id": "upgo-47506",
+    "storage_bucket": "upgo-47506.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004513157213:android:07a9a3717cd42b96f82db4",
+        "android_client_info": {
+          "package_name": "com.iotproject.upgo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1004513157213-nlrlch3bm06ndg7oekdrl3g2ac66gq0k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCRgZgh9yrSzpo6bgMqRZjmK2GYKxEeHk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1004513157213-nlrlch3bm06ndg7oekdrl3g2ac66gq0k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
