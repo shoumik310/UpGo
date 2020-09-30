@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:upgo/Screens/DataEntryScreen.dart';
 import 'package:upgo/Screens/HomeScreen.dart';
-import 'package:upgo/Screens/LoginScreen.dart';
+import 'package:upgo/Screens/login_screen.dart';
 import 'package:upgo/Screens/SignupScreen.dart';
 import 'package:upgo/Screens/WelcomeScreen.dart';
 

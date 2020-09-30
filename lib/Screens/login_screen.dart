@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import '../components/rounded_button.dart';
 
-class SignupScreen extends StatefulWidget {
-  static const String id = 'signup_screen';
+class LoginScreen extends StatefulWidget {
+  static const String id = 'login_screen';
 
   @override
-  _SignupScreenState createState() => _SignupScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   String username;
   String password;
 
@@ -56,7 +56,7 @@ class _SignupScreenState extends State<SignupScreen> {
               height: 24.0,
             ),
             RoundedButton(
-              title: 'Sign Up',
+              title: 'Log In',
               colour: Colors.blueAccent,
               onPressed: () {
                 //Todo: add database
