@@ -6,12 +6,19 @@ import 'package:upgo/Screens/login_screen.dart';
 import 'package:upgo/Screens/signup_screen.dart';
 import 'package:upgo/Screens/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 String initialRoute;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  //
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  await _firebaseMessaging.getToken().then((token) {
+    print(token);
+  });
+  //
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final user = _auth.currentUser;
   initialRoute = user != null ? HomeScreen.id : WelcomeScreen.id;

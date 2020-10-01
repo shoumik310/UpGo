@@ -49,7 +49,9 @@ class _SignupScreenState extends State<SignupScreen> {
                 onChanged: (value) {
                   _email = value;
                 },
-                //Todo: decoration: ,
+                decoration: InputDecoration(
+                  hintText: 'Enter Email Address',
+                ),
               ),
               SizedBox(
                 height: 8.0,
@@ -60,7 +62,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 onChanged: (value) {
                   _password = value;
                 },
-                //Todo: decoration: ,
+                decoration: InputDecoration(hintText: 'Enter Password'),
               ),
               SizedBox(
                 height: 24.0,

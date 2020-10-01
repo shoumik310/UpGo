@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onChanged: (value) {
                   _email = value;
                 },
-                //Todo: decoration: ,
+                decoration: InputDecoration(hintText: 'Enter Email Address'),
               ),
               SizedBox(
                 height: 8.0,
@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onChanged: (value) {
                   _password = value;
                 },
-                //Todo: decoration: ,
+                decoration: InputDecoration(hintText: 'Enter Password'),
               ),
               SizedBox(
                 height: 24.0,
