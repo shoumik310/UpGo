@@ -4,6 +4,7 @@ import 'package:upgo/data.dart';
 import '../components/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignupScreen extends StatefulWidget {
   static const String id = 'signup_screen';
@@ -78,7 +79,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     if (newUser != null) {
                       print(_email);
                       print(_password);
-                      signIn();
+                      final _pref = await SharedPreferences.getInstance();
+                      _pref.clear();
+                      _pref.setString('email', _email);
                       Navigator.pushNamed(context, DataEntryScreen.id);
                     }
                     setState(() {
@@ -93,6 +96,9 @@ class _SignupScreenState extends State<SignupScreen> {
                             content: Text(e.toString()),
                           );
                         });
+                    setState(() {
+                      showSpinner = false;
+                    });
                     print(e);
                   }
                 },

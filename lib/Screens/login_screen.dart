@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:upgo/Screens/dataentry_screen.dart';
 import 'package:upgo/Screens/home_screen.dart';
 import 'package:upgo/data.dart';
 import '../components/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
@@ -77,8 +79,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (user != null) {
                       print(_email);
                       print(_password);
-                      signIn();
-                      Navigator.pushNamed(context, HomeScreen.id);
+                      final prefs = await SharedPreferences.getInstance();
+                      print(prefs.getString('email'));
+                      if (prefs.getString('name') == null ||
+                          prefs.getString('email') != _email) {
+                        prefs.clear();
+                        prefs.setString('email', _email);
+                        Navigator.pushNamed(context, DataEntryScreen.id);
+                      } else {
+                        Navigator.pushNamed(context, HomeScreen.id);
+                      }
                     }
                     setState(() {
                       showSpinner = false;
@@ -92,6 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             content: Text(e.toString()),
                           );
                         });
+                    setState(() {
+                      showSpinner = false;
+                    });
                   }
                 },
               )

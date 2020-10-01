@@ -34,7 +34,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
-                'Please enter relevant details',
+                'Please enter relevant details (All Data is stored Locally)',
               ),
               SizedBox(
                 height: 10.0,
@@ -45,6 +45,9 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                 onChanged: (value) {
                   name = value;
                 },
+                decoration: InputDecoration(
+                  hintText: 'Enter Name',
+                ),
               ),
               SizedBox(
                 height: 20.0,
@@ -56,6 +59,9 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                 onChanged: (value) {
                   aadhar = value;
                 },
+                decoration: InputDecoration(
+                  hintText: 'Enter Aadhar Number',
+                ),
               ),
               SizedBox(
                 height: 20.0,
@@ -194,8 +200,6 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                       conditions.add("No Known Conditions");
                     }
                     addConditions(conditions);
-                    signIn();
-                    print(checkSignin());
                     Navigator.pushNamed(context, HomeScreen.id);
                   } else {
                     showDialog(
