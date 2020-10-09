@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:upgo/data.dart';
 
 class FutureCard extends StatelessWidget {
   final Function getData;
@@ -14,21 +13,34 @@ class FutureCard extends StatelessWidget {
         Widget data;
         if (snapshot.hasData) {
           if (isBirthDate) {
-            data = Text((DateTime.now()
-                        .difference(DateTime.parse(snapshot.data))
-                        .inDays /
-                    365)
-                .floor()
-                .toString());
+            data = Text(
+              (DateTime.now().difference(DateTime.parse(snapshot.data)).inDays /
+                      365)
+                  .floor()
+                  .toString(),
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            );
           } else {
-            data = Text(snapshot.data);
+            data = Text(
+              snapshot.data,
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            );
           }
         } else if (snapshot.hasError) {
           data = Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Icon(Icons.error_outline, color: Colors.red),
-              Text('Error: ${snapshot.error}'),
+              Text(
+                'Error: ${snapshot.error}',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
             ],
           );
         } else {
@@ -36,11 +48,22 @@ class FutureCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               SizedBox(child: CircularProgressIndicator()),
-              Text('Awaiting Data'),
+              Text(
+                'Awaiting Data',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
             ],
           );
         }
-        return Card(child: data);
+        return Card(
+          child: Container(
+            color: Colors.white,
+            margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            child: data,
+          ),
+        );
       },
     );
   }

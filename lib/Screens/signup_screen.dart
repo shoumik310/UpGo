@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:upgo/Screens/dataentry_screen.dart';
-import 'package:upgo/data.dart';
 import '../components/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../constants.dart';
 
 class SignupScreen extends StatefulWidget {
   static const String id = 'signup_screen';
@@ -22,7 +22,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kBackgroundColor,
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: Padding(
@@ -36,7 +36,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   tag: 'logo',
                   child: Container(
                     height: 200.0,
-                    child: Image.asset('images/logo1.jpg'),
+                    child: Image.asset('images/logo2.png'),
                   ),
                 ),
               ),
@@ -44,15 +44,13 @@ class _SignupScreenState extends State<SignupScreen> {
                 height: 48.0,
               ),
               TextField(
-                keyboardType: TextInputType.emailAddress,
-                textAlign: TextAlign.center,
-                onChanged: (value) {
-                  _email = value;
-                },
-                decoration: InputDecoration(
-                  hintText: 'Enter Email Address',
-                ),
-              ),
+                  keyboardType: TextInputType.emailAddress,
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    _email = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                      hintText: 'Enter Email Address')),
               SizedBox(
                 height: 8.0,
               ),
@@ -62,14 +60,17 @@ class _SignupScreenState extends State<SignupScreen> {
                 onChanged: (value) {
                   _password = value;
                 },
-                decoration: InputDecoration(hintText: 'Enter Password'),
+                decoration:
+                    kTextFieldDecoration.copyWith(hintText: 'Enter Password'),
               ),
               SizedBox(
                 height: 24.0,
               ),
               RoundedButton(
+                textColour: Colors.white,
+                borderColour: Colors.white,
                 title: 'Sign Up',
-                colour: Colors.blueAccent,
+                buttonColour: kBackgroundColor,
                 onPressed: () async {
                   setState(() {
                     showSpinner = true;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:upgo/Screens/dataentry_screen.dart';
 import '../Screens/login_screen.dart';
 import 'signup_screen.dart';
 import '../components/rounded_button.dart';
+import 'package:upgo/constants.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome_screen';
@@ -15,52 +15,44 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kBackgroundColor,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Hero(
-                  tag: 'logo',
-                  child: Container(
-                    child: Image.asset('images/logo1.jpg'),
-                    height: 60.0,
-                  ),
-                ),
-                SizedBox(
-                  width: 8.0,
-                ),
-                Text(
-                  'UpGo',
-                  style: TextStyle(
-                    fontSize: 45.0,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ],
+            Hero(
+              tag: 'logo',
+              child: Container(
+                child: Image.asset('images/logo2.png'),
+                height: 300.0,
+              ),
             ),
             SizedBox(
-              height: 48.0,
+              height: 100.0,
             ),
             RoundedButton(
               title: 'Log In',
-              colour: Colors.lightBlueAccent,
+              buttonColour: Colors.white,
+              textColour: kBackgroundColor,
+              borderColour: Colors.white,
               onPressed: () {
                 Navigator.pushNamed(context, LoginScreen.id);
               },
             ),
             RoundedButton(
               title: 'Sign Up',
-              colour: Colors.blueAccent,
+              buttonColour: kBackgroundColor,
+              textColour: Colors.white,
+              borderColour: Colors.white,
               onPressed: () {
                 Navigator.pushNamed(context, SignupScreen.id);
               },
             ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 20 / 100,
+            )
           ],
         ),
       ),

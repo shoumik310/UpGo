@@ -1,9 +1,11 @@
+import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:upgo/Screens/home_screen.dart';
 import 'package:upgo/components/rounded_button.dart';
 import 'package:upgo/data.dart';
 import 'package:intl/intl.dart';
+import '../constants.dart';
 
 class DataEntryScreen extends StatefulWidget {
   static const String id = 'dataentry_screen';
@@ -24,7 +26,29 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        appBar: AppBar(
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 15.0),
+            child: Icon(
+              Icons.keyboard,
+              size: 40,
+            ),
+          ),
+          backgroundColor: kBackgroundColor,
+          centerTitle: true,
+          title: BorderedText(
+            strokeWidth: 5,
+            strokeColor: Colors.white,
+            child: Text(
+              'Please enter details given below ',
+              style: TextStyle(
+                  fontFamily: 'PlayfairDisplay',
+                  fontWeight: FontWeight.bold,
+                  color: kBackgroundColor),
+            ),
+          ),
+        ),
+        backgroundColor: kBackgroundColor,
         body: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 18.0,
@@ -33,122 +57,140 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Text(
-                'Please enter relevant details (All Data is stored Locally)',
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 5 / 100,
               ),
               SizedBox(
                 height: 10.0,
               ),
               TextField(
-                textCapitalization: TextCapitalization.words,
-                textAlign: TextAlign.center,
-                onChanged: (value) {
-                  name = value;
-                },
-                decoration: InputDecoration(
-                  hintText: 'Enter Name',
-                ),
+                  textCapitalization: TextCapitalization.words,
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    name = value;
+                  },
+                  decoration:
+                      kTextFieldDecoration.copyWith(hintText: 'Enter Name')),
+              SizedBox(
+                height: 20.0,
+              ),
+              TextField(
+                  maxLength: 12,
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    aadhar = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                      hintText: 'Enter Aadhar Number')),
+              SizedBox(
+                height: 20.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        birthDate == null
+                            ? 'Select BirthDate'
+                            : DateFormat.yMd().format(birthDate),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      GestureDetector(
+                        child: new Icon(
+                          Icons.calendar_today,
+                          color: Colors.white,
+                        ),
+                        onTap: () async {
+                          final datePick = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1910),
+                              lastDate: DateTime.now());
+                          if (datePick != null) {
+                            setState(() {
+                              birthDate = datePick;
+                            });
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(left: 10),
+                        height: 30,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.horizontal(
+                                left: Radius.circular(12.0))),
+                        child: DropdownButton<String>(
+                          style: TextStyle(color: kBackgroundColor),
+                          value: type,
+                          elevation: 16,
+                          onChanged: (value) {
+                            setState(() {
+                              type = value;
+                            });
+                          },
+                          items: <String>[
+                            "A",
+                            "B",
+                            "O",
+                            "AB",
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                      Container(
+                        height: 30,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.horizontal(
+                                right: Radius.circular(12.0))),
+                        child: DropdownButton<String>(
+                          value: iveness,
+                          elevation: 16,
+                          onChanged: (value) {
+                            iveness = value;
+                          },
+                          items: <String>[
+                            "+",
+                            "-",
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
               SizedBox(
                 height: 20.0,
               ),
               TextField(
-                maxLength: 12,
-                keyboardType: TextInputType.number,
-                textAlign: TextAlign.center,
-                onChanged: (value) {
-                  aadhar = value;
-                },
-                decoration: InputDecoration(
-                  hintText: 'Enter Aadhar Number',
-                ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    birthDate == null
-                        ? 'Pick Date'
-                        : DateFormat.yMd().format(birthDate),
-                  ),
-                  GestureDetector(
-                    child: new Icon(Icons.calendar_today),
-                    onTap: () async {
-                      final datePick = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(1910),
-                          lastDate: DateTime.now());
-                      if (datePick != null) {
-                        setState(() {
-                          birthDate = datePick;
-                        });
-                      }
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  DropdownButton<String>(
-                    value: type,
-                    elevation: 16,
-                    //Todo: style: ,
-                    onChanged: (value) {
-                      setState(() {
-                        type = value;
-                      });
-                    },
-                    items: <String>[
-                      "A",
-                      "B",
-                      "O",
-                      "AB",
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                  DropdownButton<String>(
-                    value: iveness,
-                    elevation: 16,
-                    //Todo: style: ,
-                    onChanged: (value) {
-                      iveness = value;
-                    },
-                    items: <String>[
-                      "+",
-                      "-",
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Expanded(
-                child: TextField(
                   controller: _textController,
                   textCapitalization: TextCapitalization.sentences,
                   textAlign: TextAlign.center,
                   onChanged: (value) {
                     temp = value;
                   },
-                  decoration: InputDecoration(
+                  decoration: kTextFieldDecoration.copyWith(
                       hintText: 'Enter Condition',
                       suffixIcon: IconButton(
                         icon: Icon(Icons.add),
@@ -158,8 +200,18 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                           });
                           _textController.clear();
                         },
-                      )),
-                ),
+                      ))),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 5 / 100,
+              ),
+              Text(
+                conditions.length != 0
+                    ? 'Entered Conditions (Swipe to dismiss):'
+                    : '',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'PlayfairDisplay',
+                    fontWeight: FontWeight.bold),
               ),
               Expanded(
                 child: ListView.builder(
@@ -177,15 +229,21 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                         Scaffold.of(context).showSnackBar(
                             SnackBar(content: Text("$item removed")));
                       },
-                      background: Container(color: Colors.red),
-                      child: ListTile(title: Text('$item')),
+                      background: Container(color: Colors.grey),
+                      child: ListTile(
+                          title: Text(
+                        '$item',
+                        style: TextStyle(color: Colors.white),
+                      )),
                     );
                   },
                 ),
               ),
               RoundedButton(
                 title: 'Submit',
-                colour: Colors.lightBlueAccent,
+                buttonColour: kBackgroundColor,
+                textColour: Colors.white,
+                borderColour: Colors.white,
                 onPressed: () {
                   if (name != null &&
                       aadhar != null &&
