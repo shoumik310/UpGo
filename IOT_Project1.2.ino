@@ -5,8 +5,8 @@
 
 #define FIREBASE_HOST "upgo-47506.firebaseio.com"                    //enter host and authorization key
 #define FIREBASE_AUTH "VVLhwAUHtzCPIEON7xleAVbk7SADalVvQLca7xBU" 
-const char *ssid="Lelouch";//Enter WiFi Name 
-const char *pass="gotyabitch";//WiFi Password 
+const char *ssid="ssid";//Enter WiFi Name 
+const char *pass="password";//WiFi Password 
 
 const int MPU_addr=0x68;  // I2C address of the MPU-6050 
 int16_t AcX,AcY,AcZ,Tmp,GyX,GyY,GyZ; 
